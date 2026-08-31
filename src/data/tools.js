@@ -1,15 +1,22 @@
 export const CATEGORIES = [
   { slug: "keuangan", name: "Keuangan", description: "Hitung diskon, cicilan, harga jual, margin, dan BEP." },
-  { slug: "foto", name: "Foto & Gambar", description: "Kompres dan ubah format foto langsung di browser." },
-  { slug: "pdf", name: "PDF & Dokumen", description: "Ubah dan gabungkan dokumen PDF dengan mudah." },
+  { slug: "foto", name: "Foto & Gambar", description: "Kompres, ubah ukuran, crop, dan olah foto langsung di browser." },
+  { slug: "pdf", name: "PDF & Dokumen", description: "Ubah, gabungkan, kompres, dan pecah dokumen PDF dengan mudah." },
   { slug: "bisnis", name: "Bisnis", description: "Buat invoice dan dokumen bisnis dalam hitungan detik." },
-  { slug: "whatsapp", name: "WhatsApp", description: "Buat link WhatsApp otomatis untuk chat & promosi." },
+  { slug: "whatsapp", name: "WhatsApp", description: "Buat link dan QR WhatsApp otomatis untuk chat & promosi." },
   { slug: "kehidupan", name: "Kehidupan", description: "Tools praktis untuk kebutuhan sehari-hari." },
+  { slug: "produktivitas", name: "Produktivitas", description: "QR code dan tools teks untuk kerja sehari-hari." },
+  { slug: "keamanan", name: "Keamanan", description: "Buat password yang kuat dan aman." },
+  { slug: "kalkulator", name: "Kalkulator Lainnya", description: "Kalkulator umum di luar keuangan — persentase, tanggal, sains, dan lainnya." },
+  { slug: "rumah-tangga", name: "Rumah Tangga", description: "Estimasi kebutuhan material untuk renovasi dan bangun rumah." },
+  { slug: "konversi", name: "Konversi", description: "Ubah satuan panjang, berat, suhu, volume, luas, dan digital." },
 ];
 
 // Central data model — adding a new tool later only needs an entry here plus
 // its page component; every listing (home, /tools, /categories/:slug,
-// search) is derived from this single source.
+// search) is derived from this single source. `related` is an explicit list
+// of slugs shown on that tool's page — falls back to same-category tools in
+// RelatedTools.jsx when omitted.
 export const TOOLS = [
   {
     id: "kalkulator-diskon",
@@ -20,6 +27,7 @@ export const TOOLS = [
     icon: "Percent",
     keywords: ["diskon", "potongan harga", "sale", "cuci gudang"],
     popular: true,
+    related: ["margin", "harga-jual", "percentage-calculator"],
   },
   {
     id: "kalkulator-cicilan",
@@ -40,6 +48,7 @@ export const TOOLS = [
     icon: "Tag",
     keywords: ["harga jual", "jualan", "modal", "reseller", "hpp"],
     popular: true,
+    related: ["margin", "bep", "kalkulator-diskon"],
   },
   {
     id: "margin",
@@ -50,6 +59,7 @@ export const TOOLS = [
     icon: "TrendingUp",
     keywords: ["margin", "markup", "profit", "jualan", "untung"],
     popular: false,
+    related: ["harga-jual", "bep", "kalkulator-diskon"],
   },
   {
     id: "bep",
@@ -60,6 +70,7 @@ export const TOOLS = [
     icon: "Scale",
     keywords: ["bep", "break even point", "titik impas", "biaya tetap"],
     popular: false,
+    related: ["harga-jual", "margin"],
   },
   {
     id: "kompres-foto",
@@ -68,8 +79,9 @@ export const TOOLS = [
     description: "Kecilkan ukuran foto tanpa ribet, langsung di browser.",
     category: "foto",
     icon: "Image",
-    keywords: ["foto", "kompres", "kecilkan ukuran", "resize", "jpg", "png"],
+    keywords: ["foto", "kompres", "kecilkan ukuran", "perkecil foto", "resize", "jpg", "png"],
     popular: true,
+    related: ["image-resizer", "image-cropper", "jpg-ke-pdf", "background-remover"],
   },
   {
     id: "jpg-ke-pdf",
@@ -90,6 +102,7 @@ export const TOOLS = [
     icon: "Files",
     keywords: ["gabung pdf", "merge pdf", "satukan dokumen"],
     popular: false,
+    related: ["pdf-splitter", "pdf-compressor"],
   },
   {
     id: "link-whatsapp",
@@ -100,6 +113,7 @@ export const TOOLS = [
     icon: "MessageCircle",
     keywords: ["whatsapp", "wa.me", "link chat", "promosi"],
     popular: true,
+    related: ["whatsapp-qr", "qr-code-generator"],
   },
   {
     id: "invoice",
@@ -120,7 +134,239 @@ export const TOOLS = [
     icon: "Cake",
     keywords: ["umur", "usia", "tanggal lahir", "ulang tahun"],
     popular: false,
+    related: ["date-calculator", "countdown-generator"],
   },
+
+  // --- 20-tool expansion (2026-08-31) ------------------------------------
+  {
+    id: "qr-code-generator",
+    slug: "qr-code-generator",
+    name: "QR Code Generator",
+    description: "Buat QR Code untuk teks, URL, WhatsApp, email, telepon, atau WiFi.",
+    category: "produktivitas",
+    icon: "QrCode",
+    keywords: ["qr code", "kode qr", "generator qr", "barcode"],
+    popular: true,
+    related: ["whatsapp-qr", "link-whatsapp"],
+  },
+  {
+    id: "unit-converter",
+    slug: "unit-converter",
+    name: "Unit Converter",
+    description: "Ubah satuan panjang, berat, suhu, volume, luas, dan digital.",
+    category: "konversi",
+    icon: "ArrowLeftRight",
+    keywords: ["konversi", "ubah satuan", "ubah kg ke gram", "cm ke meter", "celsius ke fahrenheit"],
+    popular: true,
+  },
+  {
+    id: "percentage-calculator",
+    slug: "percentage-calculator",
+    name: "Percentage Calculator",
+    description: "Hitung persentase dari angka, kenaikan, penurunan, dan selisih.",
+    category: "kalkulator",
+    icon: "Percent",
+    keywords: ["persen", "persentase", "berapa persen"],
+    popular: true,
+    related: ["kalkulator-diskon", "average-calculator"],
+  },
+  {
+    id: "word-counter",
+    slug: "word-counter",
+    name: "Word & Character Counter",
+    description: "Hitung kata, karakter, kalimat, paragraf, dan estimasi waktu baca.",
+    category: "produktivitas",
+    icon: "Type",
+    keywords: ["hitung kata", "jumlah karakter", "word count", "kata"],
+    popular: false,
+    related: ["case-converter"],
+  },
+  {
+    id: "password-generator",
+    slug: "password-generator",
+    name: "Password Generator",
+    description: "Buat password acak yang aman dan sulit ditebak.",
+    category: "keamanan",
+    icon: "KeyRound",
+    keywords: ["password", "kata sandi", "password aman", "generator password"],
+    popular: true,
+  },
+  {
+    id: "image-resizer",
+    slug: "image-resizer",
+    name: "Image Resizer",
+    description: "Ubah ukuran (dimensi) foto sesuai kebutuhan.",
+    category: "foto",
+    icon: "Maximize2",
+    keywords: ["resize foto", "ubah ukuran foto", "perbesar", "perkecil dimensi"],
+    popular: true,
+    related: ["kompres-foto", "image-cropper"],
+  },
+  {
+    id: "image-cropper",
+    slug: "image-cropper",
+    name: "Image Cropper",
+    description: "Potong (crop) foto dengan rasio bebas atau preset umum.",
+    category: "foto",
+    icon: "Crop",
+    keywords: ["crop foto", "potong foto", "pas foto"],
+    popular: false,
+    related: ["image-resizer", "kompres-foto"],
+  },
+  {
+    id: "background-remover",
+    slug: "background-remover",
+    name: "Background Remover",
+    description: "Hapus background foto secara otomatis.",
+    category: "foto",
+    icon: "Eraser",
+    keywords: ["hapus background", "remove background", "background transparan"],
+    popular: false,
+    related: ["image-cropper", "image-resizer"],
+  },
+  {
+    id: "pdf-compressor",
+    slug: "pdf-compressor",
+    name: "PDF Compressor",
+    description: "Kecilkan ukuran file PDF.",
+    category: "pdf",
+    icon: "FileArchive",
+    keywords: ["kompres pdf", "perkecil pdf", "pdf kecil"],
+    popular: false,
+    related: ["gabung-pdf", "pdf-splitter"],
+  },
+  {
+    id: "pdf-splitter",
+    slug: "pdf-splitter",
+    name: "PDF Splitter",
+    description: "Pecah PDF menjadi beberapa file berdasarkan halaman.",
+    category: "pdf",
+    icon: "Scissors",
+    keywords: ["pecah pdf", "split pdf", "pisah halaman pdf"],
+    popular: false,
+    related: ["gabung-pdf", "pdf-compressor"],
+  },
+  {
+    id: "whatsapp-qr",
+    slug: "whatsapp-qr",
+    name: "WhatsApp QR Generator",
+    description: "Buat QR code WhatsApp untuk bisnis, siap discan pelanggan.",
+    category: "whatsapp",
+    icon: "Smartphone",
+    keywords: ["qr whatsapp", "whatsapp bisnis", "kode qr wa"],
+    popular: true,
+    related: ["link-whatsapp", "qr-code-generator"],
+  },
+  {
+    id: "color-converter",
+    slug: "color-converter",
+    name: "Color Converter",
+    description: "Ubah kode warna HEX ke RGB, HSL, HSV, dan CMYK.",
+    category: "foto",
+    icon: "Palette",
+    keywords: ["konversi warna", "hex ke rgb", "kode warna"],
+    popular: false,
+  },
+  {
+    id: "case-converter",
+    slug: "case-converter",
+    name: "Case Converter",
+    description: "Ubah teks ke UPPERCASE, Title Case, camelCase, dan lainnya.",
+    category: "produktivitas",
+    icon: "CaseSensitive",
+    keywords: ["case converter", "huruf besar", "huruf kecil", "camel case"],
+    popular: false,
+    related: ["word-counter"],
+  },
+  {
+    id: "average-calculator",
+    slug: "average-calculator",
+    name: "Average Calculator",
+    description: "Hitung rata-rata, jumlah, minimum, maksimum, dan median.",
+    category: "kalkulator",
+    icon: "Sigma",
+    keywords: ["rata-rata", "average", "nilai tengah", "median"],
+    popular: false,
+    related: ["percentage-calculator"],
+  },
+  {
+    id: "date-calculator",
+    slug: "date-calculator",
+    name: "Date Calculator",
+    description: "Hitung selisih tanggal, tambah/kurang hari, dan hari kerja.",
+    category: "kalkulator",
+    icon: "CalendarDays",
+    keywords: ["selisih tanggal", "hitung hari", "tanggal"],
+    popular: false,
+    related: ["kalkulator-umur", "countdown-generator"],
+  },
+  {
+    id: "countdown-generator",
+    slug: "countdown-generator",
+    name: "Countdown Generator",
+    description: "Buat hitung mundur ke tanggal & waktu tertentu, bisa dibagikan.",
+    category: "kalkulator",
+    icon: "Timer",
+    keywords: ["hitung mundur", "countdown", "timer acara"],
+    popular: false,
+    related: ["date-calculator"],
+  },
+  {
+    id: "scientific-calculator",
+    slug: "scientific-calculator",
+    name: "Scientific Calculator",
+    description: "Kalkulator ilmiah lengkap dengan fungsi trigonometri dan memori.",
+    category: "kalkulator",
+    icon: "Calculator",
+    keywords: ["kalkulator ilmiah", "scientific calculator", "sin cos tan"],
+    popular: false,
+  },
+  {
+    id: "area-volume-calculator",
+    slug: "area-volume-calculator",
+    name: "Area & Volume Calculator",
+    description: "Hitung luas dan volume bangun ruang umum.",
+    category: "kalkulator",
+    icon: "Box",
+    keywords: ["luas", "volume", "bangun ruang", "hitung luas"],
+    popular: false,
+    related: ["tile-calculator", "paint-calculator"],
+  },
+  {
+    id: "paint-calculator",
+    slug: "paint-calculator",
+    name: "Paint Calculator",
+    description: "Hitung kebutuhan cat tembok berdasarkan ukuran ruangan.",
+    category: "rumah-tangga",
+    icon: "PaintBucket",
+    keywords: ["kebutuhan cat", "cat tembok", "liter cat"],
+    popular: false,
+    related: ["tile-calculator", "area-volume-calculator"],
+  },
+  {
+    id: "tile-calculator",
+    slug: "tile-calculator",
+    name: "Tile Calculator",
+    description: "Hitung kebutuhan keramik/ubin berdasarkan ukuran ruangan.",
+    category: "rumah-tangga",
+    icon: "Grid3x3",
+    keywords: ["kebutuhan keramik", "ubin", "keramik lantai"],
+    popular: false,
+    related: ["paint-calculator", "area-volume-calculator"],
+  },
+];
+
+// Indonesian phrase -> tool slug synonyms, layered on top of the plain
+// keyword match in searchTools() below (section 25 of the expansion spec).
+const SEARCH_SYNONYMS = [
+  { phrase: "ubah ukuran foto", slug: "image-resizer" },
+  { phrase: "hapus background", slug: "background-remover" },
+  { phrase: "kode qr", slug: "qr-code-generator" },
+  { phrase: "ubah kg ke gram", slug: "unit-converter" },
+  { phrase: "berapa persen", slug: "percentage-calculator" },
+  { phrase: "password aman", slug: "password-generator" },
+  { phrase: "pas foto", slug: "image-cropper" },
+  { phrase: "pecah pdf", slug: "pdf-splitter" },
 ];
 
 export function getToolBySlug(slug) {
@@ -135,10 +381,19 @@ export function getCategoryBySlug(slug) {
   return CATEGORIES.find((c) => c.slug === slug);
 }
 
+export function getRelatedTools(tool, limit = 4) {
+  const explicit = (tool.related ?? []).map(getToolBySlug).filter(Boolean);
+  if (explicit.length >= limit) return explicit.slice(0, limit);
+  const sameCategory = TOOLS.filter((t) => t.category === tool.category && t.id !== tool.id && !explicit.includes(t));
+  return [...explicit, ...sameCategory].slice(0, limit);
+}
+
 export function searchTools(query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
+  const synonymSlugs = SEARCH_SYNONYMS.filter((s) => q.includes(s.phrase) || s.phrase.includes(q)).map((s) => s.slug);
   return TOOLS.filter((t) => {
+    if (synonymSlugs.includes(t.slug)) return true;
     const haystack = [t.name, t.description, t.category, ...t.keywords].join(" ").toLowerCase();
     return haystack.includes(q);
   });

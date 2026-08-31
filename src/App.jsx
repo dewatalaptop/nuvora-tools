@@ -28,6 +28,26 @@ const GabungPdfPage = lazy(() => import("./pages/tools/GabungPdfPage.jsx"));
 const LinkWhatsAppPage = lazy(() => import("./pages/tools/LinkWhatsAppPage.jsx"));
 const InvoicePage = lazy(() => import("./pages/tools/InvoicePage.jsx"));
 const UmurPage = lazy(() => import("./pages/tools/UmurPage.jsx"));
+const QrCodeGeneratorPage = lazy(() => import("./pages/tools/QrCodeGeneratorPage.jsx"));
+const UnitConverterPage = lazy(() => import("./pages/tools/UnitConverterPage.jsx"));
+const PercentageCalculatorPage = lazy(() => import("./pages/tools/PercentageCalculatorPage.jsx"));
+const WordCounterPage = lazy(() => import("./pages/tools/WordCounterPage.jsx"));
+const PasswordGeneratorPage = lazy(() => import("./pages/tools/PasswordGeneratorPage.jsx"));
+const ImageResizerPage = lazy(() => import("./pages/tools/ImageResizerPage.jsx"));
+const ImageCropperPage = lazy(() => import("./pages/tools/ImageCropperPage.jsx"));
+const BackgroundRemoverPage = lazy(() => import("./pages/tools/BackgroundRemoverPage.jsx"));
+const PdfCompressorPage = lazy(() => import("./pages/tools/PdfCompressorPage.jsx"));
+const PdfSplitterPage = lazy(() => import("./pages/tools/PdfSplitterPage.jsx"));
+const WhatsappQrPage = lazy(() => import("./pages/tools/WhatsappQrPage.jsx"));
+const ColorConverterPage = lazy(() => import("./pages/tools/ColorConverterPage.jsx"));
+const CaseConverterPage = lazy(() => import("./pages/tools/CaseConverterPage.jsx"));
+const AverageCalculatorPage = lazy(() => import("./pages/tools/AverageCalculatorPage.jsx"));
+const DateCalculatorPage = lazy(() => import("./pages/tools/DateCalculatorPage.jsx"));
+const CountdownGeneratorPage = lazy(() => import("./pages/tools/CountdownGeneratorPage.jsx"));
+const ScientificCalculatorPage = lazy(() => import("./pages/tools/ScientificCalculatorPage.jsx"));
+const AreaVolumeCalculatorPage = lazy(() => import("./pages/tools/AreaVolumeCalculatorPage.jsx"));
+const PaintCalculatorPage = lazy(() => import("./pages/tools/PaintCalculatorPage.jsx"));
+const TileCalculatorPage = lazy(() => import("./pages/tools/TileCalculatorPage.jsx"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -62,6 +82,26 @@ export default function App() {
             <Route path="/tools/link-whatsapp" element={<LinkWhatsAppPage />} />
             <Route path="/tools/invoice" element={<InvoicePage />} />
             <Route path="/tools/kalkulator-umur" element={<UmurPage />} />
+            <Route path="/tools/qr-code-generator" element={<QrCodeGeneratorPage />} />
+            <Route path="/tools/unit-converter" element={<UnitConverterPage />} />
+            <Route path="/tools/percentage-calculator" element={<PercentageCalculatorPage />} />
+            <Route path="/tools/word-counter" element={<WordCounterPage />} />
+            <Route path="/tools/password-generator" element={<PasswordGeneratorPage />} />
+            <Route path="/tools/image-resizer" element={<ImageResizerPage />} />
+            <Route path="/tools/image-cropper" element={<ImageCropperPage />} />
+            <Route path="/tools/background-remover" element={<BackgroundRemoverPage />} />
+            <Route path="/tools/pdf-compressor" element={<PdfCompressorPage />} />
+            <Route path="/tools/pdf-splitter" element={<PdfSplitterPage />} />
+            <Route path="/tools/whatsapp-qr" element={<WhatsappQrPage />} />
+            <Route path="/tools/color-converter" element={<ColorConverterPage />} />
+            <Route path="/tools/case-converter" element={<CaseConverterPage />} />
+            <Route path="/tools/average-calculator" element={<AverageCalculatorPage />} />
+            <Route path="/tools/date-calculator" element={<DateCalculatorPage />} />
+            <Route path="/tools/countdown-generator" element={<CountdownGeneratorPage />} />
+            <Route path="/tools/scientific-calculator" element={<ScientificCalculatorPage />} />
+            <Route path="/tools/area-volume-calculator" element={<AreaVolumeCalculatorPage />} />
+            <Route path="/tools/paint-calculator" element={<PaintCalculatorPage />} />
+            <Route path="/tools/tile-calculator" element={<TileCalculatorPage />} />
             <Route path="/categories/:slug" element={<CategoryPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />

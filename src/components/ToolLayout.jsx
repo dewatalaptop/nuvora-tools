@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import Breadcrumb from "./Breadcrumb.jsx";
 import AdPlaceholder from "./AdPlaceholder.jsx";
 import FAQ from "./FAQ.jsx";
+import RelatedTools from "./RelatedTools.jsx";
 import { useSeo } from "../lib/useSeo.js";
 import { getCategoryBySlug } from "../data/tools.js";
+import { recordRecentTool } from "../lib/useRecentTools.js";
+import { trackEvent } from "../lib/analytics.js";
 
 export default function ToolLayout({ tool, seoTitle, seoDescription, howTo, faq, children }) {
   const category = getCategoryBySlug(tool.category);
@@ -11,6 +15,11 @@ export default function ToolLayout({ tool, seoTitle, seoDescription, howTo, faq,
     description: seoDescription ?? tool.description,
     path: `/tools/${tool.slug}`,
   });
+
+  useEffect(() => {
+    recordRecentTool(tool.id);
+    trackEvent("tool_view", { tool_id: tool.id });
+  }, [tool.id]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
@@ -58,6 +67,8 @@ export default function ToolLayout({ tool, seoTitle, seoDescription, howTo, faq,
           <FAQ items={faq} />
         </div>
       )}
+
+      <RelatedTools tool={tool} />
     </div>
   );
 }
