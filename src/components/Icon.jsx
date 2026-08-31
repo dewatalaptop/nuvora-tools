@@ -1,0 +1,25 @@
+import {
+  Percent,
+  Landmark,
+  Tag,
+  TrendingUp,
+  Scale,
+  Image,
+  FileImage,
+  Files,
+  MessageCircle,
+  Receipt,
+  Cake,
+  Wrench,
+} from "lucide-react";
+
+// Tool data stores icon as a string (e.g. "Percent") so it stays plain,
+// serializable data. Only the specific icons actually used by TOOLS are
+// imported by name here (rather than `import * as Icons`) so lucide-react's
+// hundreds of unused icons get tree-shaken out of the bundle.
+const ICONS = { Percent, Landmark, Tag, TrendingUp, Scale, Image, FileImage, Files, MessageCircle, Receipt, Cake, Wrench };
+
+export default function Icon({ name, className = "", ...props }) {
+  const Cmp = ICONS[name] || Wrench;
+  return <Cmp className={className} {...props} />;
+}
