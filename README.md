@@ -4,7 +4,7 @@ Platform utility online gratis untuk pengguna Indonesia — kalkulator, konversi
 generator dokumen sehari-hari, sebagian besar berjalan sepenuhnya di browser (client-side) tanpa
 perlu login.
 
-**Live**: (diisi otomatis setelah deploy)
+**Live**: https://nuvora-tools.web.app
 
 ## Tools (MVP)
 
