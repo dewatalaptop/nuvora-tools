@@ -30,6 +30,7 @@ import {
   Box,
   PaintBucket,
   Grid3x3,
+  Wallet,
 } from "lucide-react";
 
 // Tool data stores icon as a string (e.g. "Percent") so it stays plain,
@@ -68,6 +69,7 @@ const ICONS = {
   Box,
   PaintBucket,
   Grid3x3,
+  Wallet,
 };
 
 export default function Icon({ name, className = "", ...props }) {

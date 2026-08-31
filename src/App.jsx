@@ -48,6 +48,7 @@ const ScientificCalculatorPage = lazy(() => import("./pages/tools/ScientificCalc
 const AreaVolumeCalculatorPage = lazy(() => import("./pages/tools/AreaVolumeCalculatorPage.jsx"));
 const PaintCalculatorPage = lazy(() => import("./pages/tools/PaintCalculatorPage.jsx"));
 const TileCalculatorPage = lazy(() => import("./pages/tools/TileCalculatorPage.jsx"));
+const ExpenseTrackerPage = lazy(() => import("./pages/tools/ExpenseTrackerPage.jsx"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -102,6 +103,7 @@ export default function App() {
             <Route path="/tools/area-volume-calculator" element={<AreaVolumeCalculatorPage />} />
             <Route path="/tools/paint-calculator" element={<PaintCalculatorPage />} />
             <Route path="/tools/tile-calculator" element={<TileCalculatorPage />} />
+            <Route path="/tools/pencatat-pengeluaran" element={<ExpenseTrackerPage />} />
             <Route path="/categories/:slug" element={<CategoryPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />

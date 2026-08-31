@@ -1,15 +1,19 @@
+// Each category carries an `accent` color name (see src/lib/categoryColors.js)
+// so tool cards and tool pages get systematic visual variety by category —
+// not a one-off different design per tool, which would break the shared
+// component pattern the rest of the app relies on.
 export const CATEGORIES = [
-  { slug: "keuangan", name: "Keuangan", description: "Hitung diskon, cicilan, harga jual, margin, dan BEP." },
-  { slug: "foto", name: "Foto & Gambar", description: "Kompres, ubah ukuran, crop, dan olah foto langsung di browser." },
-  { slug: "pdf", name: "PDF & Dokumen", description: "Ubah, gabungkan, kompres, dan pecah dokumen PDF dengan mudah." },
-  { slug: "bisnis", name: "Bisnis", description: "Buat invoice dan dokumen bisnis dalam hitungan detik." },
-  { slug: "whatsapp", name: "WhatsApp", description: "Buat link dan QR WhatsApp otomatis untuk chat & promosi." },
-  { slug: "kehidupan", name: "Kehidupan", description: "Tools praktis untuk kebutuhan sehari-hari." },
-  { slug: "produktivitas", name: "Produktivitas", description: "QR code dan tools teks untuk kerja sehari-hari." },
-  { slug: "keamanan", name: "Keamanan", description: "Buat password yang kuat dan aman." },
-  { slug: "kalkulator", name: "Kalkulator Lainnya", description: "Kalkulator umum di luar keuangan — persentase, tanggal, sains, dan lainnya." },
-  { slug: "rumah-tangga", name: "Rumah Tangga", description: "Estimasi kebutuhan material untuk renovasi dan bangun rumah." },
-  { slug: "konversi", name: "Konversi", description: "Ubah satuan panjang, berat, suhu, volume, luas, dan digital." },
+  { slug: "keuangan", name: "Keuangan", description: "Hitung diskon, cicilan, harga jual, margin, dan BEP.", accent: "emerald", icon: "Landmark" },
+  { slug: "foto", name: "Foto & Gambar", description: "Kompres, ubah ukuran, crop, dan olah foto langsung di browser.", accent: "violet", icon: "Image" },
+  { slug: "pdf", name: "PDF & Dokumen", description: "Ubah, gabungkan, kompres, dan pecah dokumen PDF dengan mudah.", accent: "rose", icon: "FileArchive" },
+  { slug: "bisnis", name: "Bisnis", description: "Buat invoice dan dokumen bisnis dalam hitungan detik.", accent: "amber", icon: "Receipt" },
+  { slug: "whatsapp", name: "WhatsApp", description: "Buat link dan QR WhatsApp otomatis untuk chat & promosi.", accent: "green", icon: "MessageCircle" },
+  { slug: "kehidupan", name: "Kehidupan", description: "Tools praktis untuk kebutuhan sehari-hari.", accent: "pink", icon: "Cake" },
+  { slug: "produktivitas", name: "Produktivitas", description: "QR code dan tools teks untuk kerja sehari-hari.", accent: "indigo", icon: "QrCode" },
+  { slug: "keamanan", name: "Keamanan", description: "Buat password yang kuat dan aman.", accent: "red", icon: "KeyRound" },
+  { slug: "kalkulator", name: "Kalkulator Lainnya", description: "Kalkulator umum di luar keuangan — persentase, tanggal, sains, dan lainnya.", accent: "orange", icon: "Calculator" },
+  { slug: "rumah-tangga", name: "Rumah Tangga", description: "Kelola keuangan rumah tangga dan estimasi kebutuhan material renovasi.", accent: "teal", icon: "PaintBucket" },
+  { slug: "konversi", name: "Konversi", description: "Ubah satuan panjang, berat, suhu, volume, luas, dan digital.", accent: "cyan", icon: "ArrowLeftRight" },
 ];
 
 // Central data model — adding a new tool later only needs an entry here plus
@@ -353,6 +357,18 @@ export const TOOLS = [
     keywords: ["kebutuhan keramik", "ubin", "keramik lantai"],
     popular: false,
     related: ["paint-calculator", "area-volume-calculator"],
+  },
+  {
+    id: "pencatat-pengeluaran",
+    slug: "pencatat-pengeluaran",
+    name: "Pencatat Pengeluaran Rumah Tangga",
+    description: "Catat dan lacak pengeluaran rumah tangga — tersimpan aman di perangkatmu sendiri.",
+    category: "rumah-tangga",
+    icon: "Wallet",
+    keywords: ["pengeluaran", "catatan keuangan", "budget rumah tangga", "keuangan keluarga", "expense tracker"],
+    popular: true,
+    highlight: true,
+    related: ["harga-jual", "average-calculator"],
   },
 ];
 

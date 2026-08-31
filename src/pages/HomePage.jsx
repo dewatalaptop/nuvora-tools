@@ -1,15 +1,21 @@
-import { ShieldCheck, Zap, MousePointerClick } from "lucide-react";
+import { ShieldCheck, Zap, MousePointerClick, ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar.jsx";
 import ToolCard from "../components/ToolCard.jsx";
 import CategoryCard from "../components/CategoryCard.jsx";
 import AdPlaceholder from "../components/AdPlaceholder.jsx";
 import FAQ from "../components/FAQ.jsx";
-import { CATEGORIES, TOOLS } from "../data/tools.js";
+import Icon from "../components/Icon.jsx";
+import { CATEGORIES, TOOLS, getCategoryBySlug } from "../data/tools.js";
+import { getAccent } from "../lib/categoryColors.js";
 import { useSeo } from "../lib/useSeo.js";
 import { useRecentTools } from "../lib/useRecentTools.js";
 
 const POPULAR = TOOLS.filter((t) => t.popular);
+// Tools opted into homepage promotion via `highlight: true` in the registry
+// (currently just the expense tracker) get a standout banner, not just a
+// regular card in a grid — that's the whole point of highlighting them.
+const HIGHLIGHTED = TOOLS.find((t) => t.highlight);
 // Tools added in the 2026-08-31 expansion — everything after the original
 // 11 in the registry. Shown as "Tools Baru" so new additions get visibility
 // without needing a separate "new" flag maintained per-tool.
@@ -63,6 +69,33 @@ export default function HomePage() {
           <p className="mt-4 text-sm text-slate-400">{TOOLS.length}+ Tools Gratis</p>
         </div>
       </section>
+
+      {HIGHLIGHTED && (
+        <section className="mx-auto max-w-6xl px-4 pt-10">
+          <Link
+            to={`/tools/${HIGHLIGHTED.slug}`}
+            className={`group relative flex flex-col items-start gap-5 overflow-hidden rounded-3xl bg-gradient-to-br ${getAccent(getCategoryBySlug(HIGHLIGHTED.category)?.accent).gradient} p-7 text-white shadow-lg transition hover:shadow-xl sm:flex-row sm:items-center sm:justify-between md:p-9`}
+          >
+            <div className="pointer-events-none absolute -right-10 -top-14 h-48 w-48 rounded-full bg-white/10" aria-hidden="true" />
+            <div className="pointer-events-none absolute -bottom-20 right-24 h-48 w-48 rounded-full bg-white/10" aria-hidden="true" />
+            <div className="relative flex items-center gap-4">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20 backdrop-blur">
+                <Icon name={HIGHLIGHTED.icon} className="h-7 w-7" />
+              </span>
+              <div>
+                <span className="inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-semibold">
+                  <Sparkles className="h-3 w-3" /> Baru &amp; Unggulan
+                </span>
+                <h2 className="mt-1.5 text-xl font-bold md:text-2xl">{HIGHLIGHTED.name}</h2>
+                <p className="mt-1 max-w-md text-sm text-white/90 md:text-base">{HIGHLIGHTED.description}</p>
+              </div>
+            </div>
+            <span className="relative flex shrink-0 items-center gap-1.5 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-navy-800 transition group-hover:gap-2.5">
+              Coba Sekarang <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
+        </section>
+      )}
 
       {recentTools.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 pt-10">

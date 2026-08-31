@@ -6,7 +6,7 @@ perlu login.
 
 **Live**: https://nuvora-tools.web.app
 
-## Tools (31)
+## Tools (32)
 
 - **Keuangan**: Diskon, Cicilan (flat/efektif), Harga Jual, Margin, BEP
 - **Foto & Gambar**: Kompres Foto, Image Resizer, Image Cropper, Color Converter, Background
@@ -17,9 +17,15 @@ perlu login.
 - **Produktivitas**: QR Code Generator, Word/Character Counter, Case Converter
 - **Keamanan**: Password Generator
 - **Kalkulator Lainnya**: Percentage, Average, Date, Countdown, Scientific, Area & Volume
-- **Rumah Tangga**: Paint Calculator, Tile Calculator
+- **Rumah Tangga**: Paint Calculator, Tile Calculator, **Pencatat Pengeluaran** (tool unggulan —
+  localStorage saja, tidak pernah dikirim ke server)
 - **Konversi**: Unit Converter
 - **Kehidupan**: Kalkulator Umur
+
+Setiap kategori punya warna aksen sendiri (`src/lib/categoryColors.js`) yang otomatis mewarnai
+badge ikon, hero banner tiap halaman tool, dan kartu kategori — supaya 32 tool terasa bervariasi
+tanpa tiap tool punya desain ad-hoc berbeda-beda (variasi sistematis lewat kategori, bukan lewat
+one-off styling per tool).
 
 Semua tool yang memproses file (foto/PDF) melakukannya sepenuhnya di browser — tidak ada upload ke
 server manapun.

@@ -3,13 +3,16 @@ import Breadcrumb from "./Breadcrumb.jsx";
 import AdPlaceholder from "./AdPlaceholder.jsx";
 import FAQ from "./FAQ.jsx";
 import RelatedTools from "./RelatedTools.jsx";
+import Icon from "./Icon.jsx";
 import { useSeo } from "../lib/useSeo.js";
 import { getCategoryBySlug } from "../data/tools.js";
+import { getAccent } from "../lib/categoryColors.js";
 import { recordRecentTool } from "../lib/useRecentTools.js";
 import { trackEvent } from "../lib/analytics.js";
 
 export default function ToolLayout({ tool, seoTitle, seoDescription, howTo, faq, children }) {
   const category = getCategoryBySlug(tool.category);
+  const accent = getAccent(category?.accent);
   useSeo({
     title: seoTitle ?? `${tool.name} Online Gratis`,
     description: seoDescription ?? tool.description,
@@ -31,8 +34,19 @@ export default function ToolLayout({ tool, seoTitle, seoDescription, howTo, faq,
         ].filter(Boolean)}
       />
 
-      <h1 className="mt-3 text-2xl font-extrabold text-navy-800 md:text-3xl">{tool.name}</h1>
-      <p className="mt-2 max-w-2xl text-slate-500">{tool.description}</p>
+      <div className={`relative mt-4 overflow-hidden rounded-3xl bg-gradient-to-br ${accent.gradient} px-6 py-8 shadow-sm md:px-10 md:py-10`}>
+        <div className="pointer-events-none absolute -right-8 -top-10 h-40 w-40 rounded-full bg-white/10" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-16 right-16 h-36 w-36 rounded-full bg-white/10" aria-hidden="true" />
+        <div className="relative flex items-center gap-4">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20 text-white backdrop-blur">
+            <Icon name={tool.icon} className="h-7 w-7" />
+          </span>
+          <div>
+            <h1 className="text-2xl font-extrabold text-white md:text-3xl">{tool.name}</h1>
+            <p className="mt-1 max-w-2xl text-white/90">{tool.description}</p>
+          </div>
+        </div>
+      </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_300px]">
         <div>{children}</div>
