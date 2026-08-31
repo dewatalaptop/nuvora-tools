@@ -35,12 +35,28 @@ export default function ImageCropperPage() {
   const [dragState, setDragState] = useState(null);
   const [format, setFormat] = useState("PNG");
   const [error, setError] = useState("");
+  // The crop stage used to be a hardcoded 560px wide, which overflowed on
+  // any phone screen — measure the actual available width instead so it
+  // scales down on mobile and stays capped at a sensible size on desktop.
+  const [stageMaxW, setStageMaxW] = useState(560);
   const stageRef = useRef(null);
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (width) setStageMaxW(Math.min(560, width));
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [file]);
 
   const displaySize = img ? fitToStage(img, rotation) : null;
 
   function fitToStage(image, rot) {
-    const maxW = 560;
+    const maxW = stageMaxW;
     const maxH = 420;
     const swapped = rot % 180 !== 0;
     const iw = swapped ? image.height : image.width;
@@ -67,7 +83,7 @@ export default function ImageCropperPage() {
     const h = ratio ? w / ratio : w;
     setBox({ x: (displaySize.w - w) / 2, y: (displaySize.h - h) / 2, w, h: Math.min(h, displaySize.h) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [img, rotation, ratio]);
+  }, [img, rotation, ratio, stageMaxW]);
 
   function startDrag(e, mode) {
     e.stopPropagation();
@@ -150,7 +166,7 @@ export default function ImageCropperPage() {
         {!file ? (
           <FileUploader accept="image/*" onFiles={handleFiles} label="Tarik foto ke sini atau klik untuk memilih" />
         ) : (
-          <div>
+          <div ref={wrapperRef}>
             <div className="mb-4 flex flex-wrap items-center gap-2">
               {RATIOS.map((r) => (
                 <button

@@ -49,13 +49,17 @@ export default function Header() {
         </span>
 
         <button
-          className="ml-auto text-slate-600 md:hidden"
+          className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate-600 hover:bg-slate-50 md:hidden"
           onClick={() => setMobileSearchOpen((v) => !v)}
           aria-label="Cari"
         >
           <Search className="h-5 w-5" />
         </button>
-        <button className="text-slate-600 md:hidden" onClick={() => setMobileOpen((v) => !v)} aria-label="Menu">
+        <button
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate-600 hover:bg-slate-50 md:hidden"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label="Menu"
+        >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
@@ -69,7 +73,7 @@ export default function Header() {
       {mobileOpen && (
         <nav className="flex flex-col gap-1 border-t border-slate-100 bg-white px-4 py-3 text-sm font-medium text-slate-700 md:hidden">
           {NAV_LINKS.map((link) => (
-            <Link key={link.label} to={link.to} className="rounded-lg px-2 py-2 hover:bg-slate-50">
+            <Link key={link.label} to={link.to} className="flex items-center rounded-lg px-3 py-3 hover:bg-slate-50">
               {link.label}
             </Link>
           ))}

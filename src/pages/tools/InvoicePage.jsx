@@ -203,26 +203,28 @@ export default function InvoicePage() {
             <p className="mt-1 text-sm text-navy-700">{customer || "-"}</p>
           </div>
 
-          <table className="mt-5 w-full text-sm">
-            <thead>
-              <tr className="border-b border-slate-200 text-left text-xs uppercase text-slate-400">
-                <th className="py-2 font-medium">Item</th>
-                <th className="py-2 text-right font-medium">Qty</th>
-                <th className="py-2 text-right font-medium">Harga</th>
-                <th className="py-2 text-right font-medium">Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((it) => (
-                <tr key={it.id} className="border-b border-slate-50">
-                  <td className="py-2 text-navy-700">{it.nama || "-"}</td>
-                  <td className="py-2 text-right text-navy-700">{parseNumber(it.qty)}</td>
-                  <td className="py-2 text-right text-navy-700">{formatRupiah(it.harga)}</td>
-                  <td className="py-2 text-right text-navy-700">{formatRupiah(parseNumber(it.qty) * parseNumber(it.harga))}</td>
+          <div className="overflow-x-auto">
+            <table className="mt-5 w-full min-w-[420px] text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-left text-xs uppercase text-slate-400">
+                  <th className="py-2 font-medium">Item</th>
+                  <th className="py-2 text-right font-medium">Qty</th>
+                  <th className="py-2 text-right font-medium">Harga</th>
+                  <th className="py-2 text-right font-medium">Subtotal</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {items.map((it) => (
+                  <tr key={it.id} className="border-b border-slate-50">
+                    <td className="py-2 text-navy-700">{it.nama || "-"}</td>
+                    <td className="py-2 text-right text-navy-700">{parseNumber(it.qty)}</td>
+                    <td className="py-2 text-right text-navy-700">{formatRupiah(it.harga)}</td>
+                    <td className="py-2 text-right text-navy-700">{formatRupiah(parseNumber(it.qty) * parseNumber(it.harga))}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="mt-4 ml-auto max-w-[220px] space-y-1.5 text-sm">
             <div className="flex justify-between text-slate-500">
