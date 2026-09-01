@@ -2,6 +2,7 @@ import { ShieldCheck, Zap, MousePointerClick, ArrowRight, Sparkles } from "lucid
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar.jsx";
 import ToolCard from "../components/ToolCard.jsx";
+import FeaturedToolCard from "../components/FeaturedToolCard.jsx";
 import CategoryCard from "../components/CategoryCard.jsx";
 import AdPlaceholder from "../components/AdPlaceholder.jsx";
 import FAQ from "../components/FAQ.jsx";
@@ -10,8 +11,13 @@ import { CATEGORIES, TOOLS, getCategoryBySlug } from "../data/tools.js";
 import { getAccent } from "../lib/categoryColors.js";
 import { useSeo } from "../lib/useSeo.js";
 import { useRecentTools } from "../lib/useRecentTools.js";
+import { formatRelativeTime } from "../lib/formatRelativeTime.js";
 
 const POPULAR = TOOLS.filter((t) => t.popular);
+// Small, deliberate pick for the "Pilihan Nuvora" section — opted in via
+// `featured: true` in the registry (same generic-flag pattern as `highlight`
+// below), not hardcoded slugs, so the picks can change from the data model.
+const FEATURED = TOOLS.filter((t) => t.featured);
 // Tools opted into homepage promotion via `highlight: true` in the registry
 // (currently just the expense tracker) get a standout banner, not just a
 // regular card in a grid — that's the whole point of highlighting them.
@@ -20,6 +26,12 @@ const HIGHLIGHTED = TOOLS.find((t) => t.highlight);
 // 11 in the registry. Shown as "Tools Baru" so new additions get visibility
 // without needing a separate "new" flag maintained per-tool.
 const NEW_TOOLS = TOOLS.slice(11, 19);
+
+// Static, always-visible quick picks under the hero search — distinct from
+// SearchBar's own focus-triggered suggestion panel.
+const QUICK_PICKS = ["qr-code-generator", "kalkulator-diskon", "kompres-foto", "invoice"]
+  .map((slug) => TOOLS.find((t) => t.slug === slug))
+  .filter(Boolean);
 
 const NEED_SHORTCUTS = [
   { emoji: "💰", label: "Uang", category: "keuangan" },
@@ -58,17 +70,39 @@ export default function HomePage() {
       <section className="border-b border-slate-100 bg-gradient-to-b from-brand-50/60 to-white px-4 py-16 md:py-24">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-3xl font-extrabold tracking-tight text-navy-800 md:text-5xl">
-            Tools Gratis untuk Kehidupan Sehari-hari
+            Selesaikan pekerjaan Anda lebih cepat.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-slate-500 md:text-lg">
-            Hitung, ubah, buat, dan selesaikan berbagai kebutuhanmu secara online. Cepat, gratis, dan tanpa perlu login.
+            Tools sederhana untuk menghitung, membuat, mengubah, dan menyelesaikan berbagai kebutuhan sehari-hari.
           </p>
           <div className="mx-auto mt-8 max-w-xl">
             <SearchBar />
           </div>
-          <p className="mt-4 text-sm text-slate-400">{TOOLS.length}+ Tools Gratis</p>
+          <div className="mx-auto mt-4 flex max-w-xl flex-wrap items-center justify-center gap-2">
+            {QUICK_PICKS.map((tool) => (
+              <Link
+                key={tool.id}
+                to={`/tools/${tool.slug}`}
+                className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 transition hover:border-brand-300 hover:text-brand-600"
+              >
+                {tool.name}
+              </Link>
+            ))}
+          </div>
+          <p className="mt-5 text-sm text-slate-400">{TOOLS.length}+ Tools Gratis</p>
         </div>
       </section>
+
+      {FEATURED.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 pt-14">
+          <h2 className="mb-6 text-xl font-bold text-navy-800 md:text-2xl">Pilihan Nuvora</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURED.map((tool) => (
+              <FeaturedToolCard key={tool.id} tool={tool} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {HIGHLIGHTED && (
         <section className="mx-auto max-w-6xl px-4 pt-10">
@@ -98,12 +132,27 @@ export default function HomePage() {
       )}
 
       {recentTools.length > 0 && (
-        <section className="mx-auto max-w-6xl px-4 pt-10">
+        <section className="mx-auto max-w-6xl px-4 pt-14">
           <h2 className="mb-4 text-lg font-bold text-navy-800">Terakhir Digunakan</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {recentTools.slice(0, 4).map((tool) => (
-              <ToolCard key={tool.id} tool={tool} />
-            ))}
+          <div className="divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+            {recentTools.slice(0, 4).map((tool) => {
+              const accent = getAccent(getCategoryBySlug(tool.category)?.accent);
+              return (
+                <Link
+                  key={tool.id}
+                  to={`/tools/${tool.slug}`}
+                  className="flex items-center gap-3 px-4 py-3 transition hover:bg-slate-50"
+                >
+                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${accent.badgeBg} ${accent.badgeText}`}>
+                    <Icon name={tool.icon} className="h-4 w-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-medium text-navy-800">{tool.name}</span>
+                  </span>
+                  <span className="shrink-0 text-xs text-slate-400">{formatRelativeTime(tool.lastUsedAt)}</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

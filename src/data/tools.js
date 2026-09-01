@@ -31,6 +31,8 @@ export const TOOLS = [
     icon: "Percent",
     keywords: ["diskon", "potongan harga", "sale", "cuci gudang"],
     popular: true,
+    badge: "populer",
+    featured: true,
     related: ["margin", "harga-jual", "percentage-calculator"],
   },
   {
@@ -85,6 +87,7 @@ export const TOOLS = [
     icon: "Image",
     keywords: ["foto", "kompres", "kecilkan ukuran", "perkecil foto", "resize", "jpg", "png"],
     popular: true,
+    featured: true,
     related: ["image-resizer", "image-cropper", "jpg-ke-pdf", "background-remover"],
   },
   {
@@ -128,6 +131,8 @@ export const TOOLS = [
     icon: "Receipt",
     keywords: ["invoice", "kwitansi", "faktur", "tagihan"],
     popular: true,
+    badge: "pilihan",
+    featured: true,
   },
   {
     id: "kalkulator-umur",
@@ -151,6 +156,8 @@ export const TOOLS = [
     icon: "QrCode",
     keywords: ["qr code", "kode qr", "generator qr", "barcode"],
     popular: true,
+    badge: "populer",
+    featured: true,
     related: ["whatsapp-qr", "link-whatsapp"],
   },
   {
@@ -194,6 +201,7 @@ export const TOOLS = [
     icon: "KeyRound",
     keywords: ["password", "kata sandi", "password aman", "generator password"],
     popular: true,
+    badge: "cepat",
   },
   {
     id: "image-resizer",

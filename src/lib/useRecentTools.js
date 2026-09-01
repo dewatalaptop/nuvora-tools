@@ -29,7 +29,10 @@ export function useRecentTools() {
   const [tools, setTools] = useState([]);
   useEffect(() => {
     const resolved = readEntries()
-      .map((e) => getToolBySlug(e.toolId))
+      .map((e) => {
+        const tool = getToolBySlug(e.toolId);
+        return tool ? { ...tool, lastUsedAt: e.timestamp } : null;
+      })
       .filter(Boolean);
     setTools(resolved);
   }, []);
