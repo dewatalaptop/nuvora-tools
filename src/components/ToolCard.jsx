@@ -20,7 +20,7 @@ export default function ToolCard({ tool, showCategory = false }) {
   return (
     <Link
       to={`/tools/${tool.slug}`}
-      className={`group flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-sm ${accent.ring}`}
+      className={`group flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-sm active:scale-[0.98] active:shadow-none ${accent.ring}`}
     >
       <div className="flex items-start justify-between">
         <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${accent.badgeBg} ${accent.badgeText}`}>

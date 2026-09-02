@@ -9,7 +9,7 @@ export default function CategoryCard({ category }) {
   return (
     <Link
       to={`/categories/${category.slug}`}
-      className={`flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${accent.ring}`}
+      className={`flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] active:shadow-sm ${accent.ring}`}
     >
       <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${accent.heroBg} ${accent.heroText}`}>
         <Icon name={category.icon} className="h-6 w-6" />

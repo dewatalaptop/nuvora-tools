@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
+import MobileBottomNav from "./components/MobileBottomNav.jsx";
 
 import HomePage from "./pages/HomePage.jsx";
 import AllToolsPage from "./pages/AllToolsPage.jsx";
@@ -64,7 +65,7 @@ function PageLoading() {
 
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50">
+    <div className="flex min-h-screen flex-col bg-slate-50 pb-16 md:pb-0">
       <ScrollToTop />
       <Header />
       <main className="flex-1">
@@ -114,6 +115,7 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
+      <MobileBottomNav />
     </div>
   );
 }

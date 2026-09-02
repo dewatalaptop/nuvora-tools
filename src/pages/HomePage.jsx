@@ -83,7 +83,7 @@ export default function HomePage() {
               <Link
                 key={tool.id}
                 to={`/tools/${tool.slug}`}
-                className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 transition hover:border-brand-300 hover:text-brand-600"
+                className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 transition hover:border-brand-300 hover:text-brand-600 active:scale-95"
               >
                 {tool.name}
               </Link>
@@ -108,7 +108,7 @@ export default function HomePage() {
         <section className="mx-auto max-w-6xl px-4 pt-10">
           <Link
             to={`/tools/${HIGHLIGHTED.slug}`}
-            className={`group relative flex flex-col items-start gap-5 overflow-hidden rounded-3xl bg-gradient-to-br ${getAccent(getCategoryBySlug(HIGHLIGHTED.category)?.accent).gradient} p-7 text-white shadow-lg transition hover:shadow-xl sm:flex-row sm:items-center sm:justify-between md:p-9`}
+            className={`group relative flex flex-col items-start gap-5 overflow-hidden rounded-3xl bg-gradient-to-br ${getAccent(getCategoryBySlug(HIGHLIGHTED.category)?.accent).gradient} p-7 text-white shadow-lg transition hover:shadow-xl active:scale-[0.99] sm:flex-row sm:items-center sm:justify-between md:p-9`}
           >
             <div className="pointer-events-none absolute -right-10 -top-14 h-48 w-48 rounded-full bg-white/10" aria-hidden="true" />
             <div className="pointer-events-none absolute -bottom-20 right-24 h-48 w-48 rounded-full bg-white/10" aria-hidden="true" />
@@ -141,7 +141,7 @@ export default function HomePage() {
                 <Link
                   key={tool.id}
                   to={`/tools/${tool.slug}`}
-                  className="flex items-center gap-3 px-4 py-3 transition hover:bg-slate-50"
+                  className="flex items-center gap-3 px-4 py-3 transition hover:bg-slate-50 active:bg-slate-100"
                 >
                   <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${accent.badgeBg} ${accent.badgeText}`}>
                     <Icon name={tool.icon} className="h-4 w-4" />
@@ -175,7 +175,7 @@ export default function HomePage() {
             <Link
               key={n.category}
               to={`/categories/${n.category}`}
-              className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-4 text-center transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+              className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-4 text-center transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md active:scale-95"
             >
               <span className="text-2xl">{n.emoji}</span>
               <span className="text-sm font-medium text-navy-700">{n.label}</span>

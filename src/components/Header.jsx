@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, Sparkles, X } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import SearchBar from "./SearchBar.jsx";
 
 const NAV_LINKS = [
@@ -10,13 +10,14 @@ const NAV_LINKS = [
   { to: "/tools", label: "Kategori" },
 ];
 
+// On mobile, primary navigation lives in the bottom tab bar
+// (MobileBottomNav.jsx) instead of a header hamburger menu — this header
+// stays a slim logo + search bar there, closer to a native app's top bar.
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setMobileOpen(false);
     setMobileSearchOpen(false);
   }, [navigate]);
 
@@ -49,18 +50,11 @@ export default function Header() {
         </span>
 
         <button
-          className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate-600 hover:bg-slate-50 md:hidden"
+          className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate-600 transition hover:bg-slate-50 active:bg-slate-100 md:hidden"
           onClick={() => setMobileSearchOpen((v) => !v)}
           aria-label="Cari"
         >
           <Search className="h-5 w-5" />
-        </button>
-        <button
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate-600 hover:bg-slate-50 md:hidden"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Menu"
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
@@ -68,16 +62,6 @@ export default function Header() {
         <div className="border-t border-slate-100 bg-white p-3 md:hidden">
           <SearchBar compact placeholder="Cari tool..." autoFocus />
         </div>
-      )}
-
-      {mobileOpen && (
-        <nav className="flex flex-col gap-1 border-t border-slate-100 bg-white px-4 py-3 text-sm font-medium text-slate-700 md:hidden">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.label} to={link.to} className="flex items-center rounded-lg px-3 py-3 hover:bg-slate-50">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
       )}
     </header>
   );

@@ -15,7 +15,7 @@ export default function FeaturedToolCard({ tool }) {
   return (
     <Link
       to={`/tools/${tool.slug}`}
-      className="group flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-sm"
+      className="group flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-sm active:scale-[0.98] active:shadow-none"
     >
       <div className="flex items-center justify-between">
         <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${accent.badgeBg} ${accent.badgeText}`}>
